@@ -1,19 +1,19 @@
 from playwright.sync_api import sync_playwright, Playwright
+import json
 
 def run(playwright: Playwright):
 	firefox = playwright.firefox
 	browser = firefox.launch(headless=False)
 	context = browser.new_context()
 	page = context.new_page()
-	page.goto("https://practicetestautomation.com/practice-test-login/")
-	page.get_by_label("username").fill("student")
-	page.get_by_label("password").fill("Password123")
-	page.get_by_role('button', name="Submit").click()
+	with open("cookies.json", "r") as f:
+		cookies = json.loads(f.read())
+		context.add_cookies(cookies)
+	page.goto("https://instagram.com")
+	# page.get_by_label("username").fill("student")
+	# page.get_by_label("password").fill("Password123")
+	# page.get_by_role('button', name="Submit").click()
 	page.screenshot(path="login.png")
-
-	# with open("cookies.json", "w") as f:
-	# 	f.write(json.dumps(context.cookies()))
-
 	input("Press Enter to close the browser...")
 	browser.close()
 
