@@ -13,7 +13,6 @@ def run(playwright: Playwright):
 	# page.get_by_label("username").fill("student")
 	# page.get_by_label("password").fill("Password123")
 	# page.get_by_role('button', name="Submit").click()
-	page.screenshot(path="login.png")
 	input("Press Enter to close the browser...")
 	browser.close()
 
